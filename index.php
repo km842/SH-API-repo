@@ -1,51 +1,60 @@
 <?php
-/**
- * Step 1: Require the Slim Framework
- *
- * If you are not using Composer, you need to require the
- * Slim Framework and register its PSR-0 autoloader.
- *
- * If you are using Composer, you can skip this step.
- */
+
 require 'Slim/Slim.php';
 
 \Slim\Slim::registerAutoloader();
 
+
 /**
- * Step 2: Instantiate a Slim application
- *
- * This example instantiates a Slim application using
- * its default settings. However, you will usually configure
- * your Slim application now by passing an associative array
- * of setting names and values into the application constructor.
+ * 1.) Get a list of all objects based on user search.
+ * 2.) Insert user into  a the database using key.
+ * 3.) Insert diary entry
  */
 $app = new \Slim\Slim();
 
-/**
- * Step 3: Define the Slim application routes
- *
- * Here we define several Slim application routes that respond
- * to appropriate HTTP request methods. In this example, the second
- * argument for `Slim::get`, `Slim::post`, `Slim::put`, `Slim::patch`, and `Slim::delete`
- * is an anonymous function.
- */
+/*
+Add connection checking etc! Respond with status messages TODO!!!!!
+*/
+
+function getConnection () {
+    // $hostName = "km842.host.cs.st-andrews.ac.uk";
+    $hostName = "138.251.206.58";
+    $sqlUsername = "km842";
+    $password = "8/c328D5";
+    $schemaName = "km842_db";
+
+    if (isset($hostName, $sqlUsername, $password, $schemaName)) {
+        $db = new PDO ("mysql:host=$hostName;dbname=$schemaName;port=3306", $sqlUsername, $password);
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        return $db;
+     } else {
+        echo "not connected!";
+        }
+    } 
+    
 
 // GET route
 $app->get(
     '/hello',
     function () {
-    echo json_encode("hell");
-        }
+    }
 );
 
 // POST route
 $app->post(
-    '/post',
-    function () use ($app){
+    '/post', function () use ($app){
     $request = Slim\Slim::getInstance()->request();
     $newUser = json_decode($request->getBody());
 
-        echo 'This is a POST route';
+    $id = $newUser->id;
+    $name = $newUser->name;
+    $dob = $newUser->dob;
+    $height = $newUser->height;
+    $weight = $newUser->weight;
+
+    echo "$id\n";
+    
+    echo json_encode(array('user'=> $newUser));
     }
 );
 
@@ -70,10 +79,4 @@ $app->delete(
     }
 );
 
-/**
- * Step 4: Run the Slim application
- *
- * This method should be called last. This executes the Slim application
- * and returns the HTTP response to the HTTP client.
- */
 $app->run();
