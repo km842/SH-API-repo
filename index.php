@@ -6,9 +6,11 @@ require 'Slim/Slim.php';
 
 
 /**
- * 1.) Get a list of all objects based on user search.
- * 2.) Insert user into  a the database using key.
- * 3.) Insert diary entry.
+ * 1.) Get a list of all objects based on user search. DONE
+ * 2.) Insert user into  a the database using key. TODO
+ * 3.) Insert diary entry. TODO
+ * 4.) Config files outside of directory for passwords, logins etc.
+
  MAke dummy test tesco account!
  */
 $app = new \Slim\Slim();
@@ -51,13 +53,21 @@ function getConnection () {
 */
 
 
-// GET route
+/*Destroys a database connection*/
+function destroyConnection ($db) {
+    $db = null;
+}
+/*
+*/
+
+/*GET methods that returns a list of products based on a search parameter - a id or text*/
 $app->get(
     '/hello/',
     function () {
         //ALWAYS USE THIS METHOD TO GET SLIM INSTANCE FOR ALL REQUESTS!
         $searchKey = Slim\Slim::getInstance()->request()->get('id');
 
+        // Needed to get session key from Tesco so that we can use their api.
         global $tescoUsername, $tescoPass, $tescoDevKey, $tescoAppKey;  
         $url = "https://secure.techfortesco.com/groceryapi/restservice.aspx?command=LOGIN&email={$tescoUsername}&password={$tescoPass}&developerkey={$tescoDevKey}&applicationkey={$tescoAppKey}";
         echo $url;
@@ -82,7 +92,8 @@ $app->get(
     }
 );
 
-// POST route
+/* POST method from InitialViewController that inserts a user to the database.
+*/
 $app->post(
     '/post', function () use ($app){
     $request = Slim\Slim::getInstance()->request();
@@ -95,9 +106,12 @@ $app->post(
     $weight = $newUser->weight;
 
     echo "$id\n";
-    echo json_encode(array('user'=> $newUser));
+    echo $newUser;
+    // echo json_encode(array('user'=> $newUser));
     }
 );
+/*
+*/
 
 // PUT route
 $app->put(
