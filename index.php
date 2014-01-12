@@ -105,9 +105,34 @@ $app->post(
     $height = $newUser->height;
     $weight = $newUser->weight;
 
-    echo "$id\n";
-    echo $newUser;
-    // echo json_encode(array('user'=> $newUser));
+
+    $sqlStatement = "INSERT INTO Person (personId, name, dob, height, weight) VALUES (:id, :name, :dob, :height, :weight)";
+
+    try {
+        $db = getConnection();
+        $stmt = $db->prepare($sqlStatement);
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':dob', $dob);
+        $stmt->bindParam(':height', $height);
+        $stmt->bindParam(':weight', $weight);
+        $stmt->execute();
+
+        $db = null;
+    } catch (PDOException $e) {
+        $e->getMessage();
+    }
+
+
+
+    // echo "$id\n";
+    // echo "$name\n";
+    // echo "$dob\n";
+    // echo "$height\n";
+    // echo "$weight\n";
+
+    // echo $newUser;
+    echo json_encode($newUser);
     }
 );
 /*
