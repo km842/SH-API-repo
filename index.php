@@ -70,26 +70,29 @@ $app->get(
         // Needed to get session key from Tesco so that we can use their api.
         global $tescoUsername, $tescoPass, $tescoDevKey, $tescoAppKey;  
         $url = "https://secure.techfortesco.com/groceryapi/restservice.aspx?command=LOGIN&email={$tescoUsername}&password={$tescoPass}&developerkey={$tescoDevKey}&applicationkey={$tescoAppKey}";
-        echo $url;
+        // echo $url;
         $urlContents = json_decode(file_get_contents($url));
 
         if ($urlContents->StatusCode == 0) {
            global $sessionKey;
            $sessionKey = $urlContents->SessionKey;
-           echo "\n{$urlContents->StatusCode}\n{$sessionKey}";
-           echo "\nin here";
+           // echo "\n{$urlContents->StatusCode}\n{$sessionKey}";
+           // echo "\nin here\n";
 
            $search = "http://www.techfortesco.com/groceryapi/restservice.aspx?command=PRODUCTSEARCH&searchtext={$searchKey}&page=1&sessionkey={$sessionKey}";
            $searchResults = json_decode(file_get_contents($search), true);
 
-           foreach ($searchResults['Products'] as $data) {
-               echo "{$data["Name"]}\n";
-           }
-        } else {
-            echo $urlContents->StatusCode;
-            echo "\nnot working!";
-        }
+        //    foreach ($searchResults['Products'] as $data) {
+        //        echo "{$data["Name"]}\n";
+        //    }
+        // } else {
+        //     echo $urlContents->StatusCode;
+        //     echo "\nnot working!";
+        // }
+
+           echo json_encode($searchResults);
     }
+}
 );
 
 /* POST method from InitialViewController that inserts a user to the database.
