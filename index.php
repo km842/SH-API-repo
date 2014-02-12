@@ -7,9 +7,10 @@ require 'Slim/Slim.php';
 
 /**
  * 1.) Get a list of all objects based on user search. DONE
- * 2.) Insert user into  a the database using key. TODO
+ * 2.) Insert user into  a the database using key. DONE
  * 3.) Insert diary entry. TODO
  * 4.) Config files outside of directory for passwords, logins etc.
+ * 5.) Alter database to allow multiple entries of products on the same day - currently throwing error!
 
  MAke dummy test tesco account!
  */
@@ -20,7 +21,8 @@ Add connection checking etc! Respond with status messages TODO!!!!!
 */
 
 /*
-Global variables*/
+Global variables - need to be moved to a higher directory for security!!!!
+*/
 
 $sessionKey;
 $tescoUsername = "kunal.mandalia@hotmail.com";
@@ -53,12 +55,24 @@ function getConnection () {
 */
 
 
+/*Create session key for tesco api
+*/
+function createSessionKey () {
+    global $tescoUsername, $tescoPass, $tescoDevKey, $tescoAppKey, $sessionKey;
+
+        $url = "https://secure.techfortesco.com/groceryapi/restservice.aspx?command=LOGIN&email={$tescoUsername}&password={$tescoPass}&developerkey={$tescoDevKey}&applicationkey={$tescoAppKey}";
+        // echo $url;
+        $urlContents = json_decode(file_get_contents($url));
+
+        if ($urlContents->StatusCode == 0) {
+            return $urlContents->SessionKey;
+        }
+}
+
 /*Destroys a database connection*/
 function destroyConnection ($db) {
     $db = null;
 }
-/*
-*/
 
 /*GET methods that returns a list of products based on a search parameter - a id or text*/
 $app->get(
@@ -95,6 +109,21 @@ $app->get(
 }
 );
 
+/* Gets a specific product's details based on a product ID.
+*/
+$app->get('/product/', function () {
+    $searchKey = Slim\Slim::getInstance()->request()->get('id');
+    // global $tescoUsername, $tescoPass, $tescoDevKey, $tescoAppKey, $sessionKey;
+
+    $sessionKey = createSessionKey(); 
+
+    // echo $sessionKey;
+    $productInfoURL = "http://www.techfortesco.com/groceryapi/restservice.aspx?command=PRODUCTSEARCH&searchtext={$searchKey}&extendedinfo=Y&page=1&sessionkey={$sessionKey}";
+    $productInfo = json_decode(file_get_contents($productInfoURL), true);
+    echo json_encode($productInfo);
+});
+
+
 /* POST method from InitialViewController that inserts a user to the database.
 */
 $app->post(
@@ -125,21 +154,94 @@ $app->post(
     } catch (PDOException $e) {
         $e->getMessage();
     }
-
-
-
-    // echo "$id\n";
-    // echo "$name\n";
-    // echo "$dob\n";
-    // echo "$height\n";
-    // echo "$weight\n";
-
-    // echo $newUser;
     echo json_encode($newUser);
     }
 );
-/*
+
+function checkProductEntry($productId) {
+    $db = getConnection();
+    $sqlStatement = "SELECT productId FROM Products WHERE productId = {$productId}";
+    try {
+        $stmt = $db->prepare($sqlStatement);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        echo count($result);
+
+        if (count($result == 0)) {
+            //add to database helper method here!
+            addProductToDatabase($productId);
+        }
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+}
+
+function addProductToDatabase ($productId) {
+    //get data from tesco and then add to database
+    $sessionKey = createSessionKey();
+    $productInfoURL = "http://www.techfortesco.com/groceryapi/restservice.aspx?command=PRODUCTSEARCH&searchtext={$productId}&extendedinfo=Y&page=1&sessionkey={$sessionKey}";
+    $result = json_decode(file_get_contents($productInfoURL));
+    $name = $result->Products[0]->Name;
+    $calories = $result->Products[0]->RDA_Calories_Count;
+    $salt = $result->Products[0]->RDA_Salt_Grammes;
+    $fat = $result->Products[0]->RDA_Fat_Grammes;
+    $satFat = $result->Products[0]->RDA_Saturates_Grammes;
+    $sugar = $result->Products[0]->RDA_Sugar_Grammes;
+
+    $sql = "INSERT INTO Products (productId, name, calories, salt, fat, saturates, sugar) VALUES (:id, :name, :calories,
+        :salt, :fat, :satFat, :sugar)";
+
+    try {
+        $db = getConnection();
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':id', $productId);
+        $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':calories', $calories);
+        $stmt->bindParam(':salt', $salt);
+        $stmt->bindParam(':fat', $fat);
+        $stmt->bindParam(':satFat', $satFat);
+        $stmt->bindParam(':sugar', $sugar);
+        $stmt->execute();
+        $db = null;
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+}
+
+/* POST method that inserts an entry into the diary database. CURRENTLY THROWING ERROR FOR SAME PRODUCT AND PERSON ENTRY.
 */
+$app->post('/insertIntoDiary', function () use ($app) {
+    $request = Slim\Slim::getInstance()->request();
+    $entry = json_decode($request->getBody());
+    $user = $entry->id;
+    $product = $entry->productCode;
+    $date = $entry->date;
+    // echo $user;
+    // echo $product;
+    // echo $date;
+
+    checkProductEntry($product);
+        $sql = "INSERT INTO Diary (dateConsumed, Products_productId, Person_personId) VALUES (:date, :product, :user)";
+        try {
+            $db = getConnection();
+            $stmt = $db->prepare($sql);
+            $stmt->bindParam(':date', $date);
+            $stmt->bindParam(':product', $product);
+            $stmt->bindParam(':user', $user);
+            $stmt->execute();
+            $db = null;
+            echo "inserted";
+        } catch (PDOException $e) {
+             echo $e->getMessage();
+            }
+        
+    }
+);
+/*Gets a set of inique dates that the user has used the application*/
+$app->get('/getDates', function () {
+
+});
+
 
 // PUT route
 $app->put(
