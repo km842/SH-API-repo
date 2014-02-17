@@ -116,8 +116,8 @@ $app->get('/product/', function () {
     // global $tescoUsername, $tescoPass, $tescoDevKey, $tescoAppKey, $sessionKey;
 
     $sessionKey = createSessionKey(); 
-
-    // echo $sessionKey;
+    echo "fjkasdkjaskjdb";
+    echo $sessionKey;
     $productInfoURL = "http://www.techfortesco.com/groceryapi/restservice.aspx?command=PRODUCTSEARCH&searchtext={$searchKey}&extendedinfo=Y&page=1&sessionkey={$sessionKey}";
     $productInfo = json_decode(file_get_contents($productInfoURL), true);
     echo json_encode($productInfo);
@@ -237,11 +237,39 @@ $app->post('/insertIntoDiary', function () use ($app) {
         
     }
 );
-/*Gets a set of inique dates that the user has used the application*/
+/*Gets a set of inique dates that the user has used the application
+    SEND PERSON ID USING USER DEFAULTS
+*/
 $app->get('/getDates', function () {
-
+$sqlStatement = "SELECT DISTINCT dateConsumed FROM Diary WHERE Person_personId=100 ORDER BY dateConsumed DESC";
+try {
+    $db = getConnection();
+    $stmt = $db->prepare($sqlStatement);
+    $stmt->execute();
+    $result = $stmt->fetchAll();
+    echo json_encode($result);
+} catch (PDOException $e) {
+    echo $e->getMessage();
+}
 });
 
+/*Gets a list of product names based on the days they were eaten. send date id. can also add search fazcility to view controller?
+    ADD USER DEFAULTS IN WHERE FOR SQL STATEMENT
+*/
+$app->get('/productsFromDate', function() {
+    $dateKey = Slim\Slim::getInstance()->request()->get('date');
+    $sqlStatement = "SELECT productId, name FROM Products WHERE productId IN (SELECT Products_productId FROM Diary WHERE dateConsumed= {$dateKey})";
+    try {
+        $db = getConnection();
+        $stmt = $db->prepare($sqlStatement);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        $db = null;
+        echo json_encode($result);
+    } catch (PDOException $e) {
+        $e->getMessage();
+    }
+});
 
 // PUT route
 $app->put(
