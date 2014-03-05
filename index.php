@@ -34,6 +34,8 @@ $hostName = "138.251.206.58";
 $sqlUsername = "km842";
 $password = "8/c328D5";
 $schemaName = "km842_db";
+
+$googleApiKey = "AIzaSyCK7y0TT49xIi3IafMxbsmvrykDLlYNpMA";
 /*
 */
 
@@ -74,6 +76,42 @@ function destroyConnection ($db) {
     $db = null;
 }
 
+function getAllReferences ($latitude, $longitude, $maxResults = 60, $nextToken = false) {
+    global $googleApiKey;
+
+    $references = array();
+    $nextStr = "";
+    if ($nextToken) {
+        $nextStr = "pagetoken={$nextToken}";
+    }
+    $googleUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={$latitude},{$longitude}&rankby=distance&keyword=pointsofinterest&sensor=true&key={$googleApiKey}&{$nextStr}";
+    // echo "\n{$googleUrl}";
+    sleep(2);
+    $dataArray = json_decode(file_get_contents($googleUrl));
+    if (isset($dataArray->{'status'}) && $dataArray->{'status'} == "OK") {
+            array_push($references, $dataArray->{'results'});
+        if (!empty($dataArray->{'next_page_token'}) && count($references) < $maxResults) {
+            // echo "\n{$dataArray['next_page_token']}";
+            $nextArray = getAllReferences($latitude, $longitude, $maxResults-20, $dataArray->{'next_page_token'});   
+            $references = array_merge($references, (array)$nextArray);
+        }
+        return $references;
+    }
+
+}
+
+/*
+* Return user location data as json from Google
+*/
+$app->get('/locations/', function() {
+    $latitude = Slim\Slim::getInstance()->request()->get('lat');
+    $longitude = Slim\Slim::getInstance()->request()->get('long');
+    global $googleApiKey;      
+    $references = getAllReferences($latitude, $longitude);
+    echo json_encode($references);    
+});
+
+
 /*GET methods that returns a list of products based on a search parameter - a id or text*/
 $app->get(
     '/hello/',
@@ -84,40 +122,22 @@ $app->get(
         // Needed to get session key from Tesco so that we can use their api.
         global $tescoUsername, $tescoPass, $tescoDevKey, $tescoAppKey;  
         $url = "https://secure.techfortesco.com/groceryapi/restservice.aspx?command=LOGIN&email={$tescoUsername}&password={$tescoPass}&developerkey={$tescoDevKey}&applicationkey={$tescoAppKey}";
-        // echo $url;
         $urlContents = json_decode(file_get_contents($url));
 
         if ($urlContents->StatusCode == 0) {
            global $sessionKey;
            $sessionKey = $urlContents->SessionKey;
-           // echo "\n{$urlContents->StatusCode}\n{$sessionKey}";
-           // echo "\nin here\n";
-
            $search = "http://www.techfortesco.com/groceryapi/restservice.aspx?command=PRODUCTSEARCH&searchtext={$searchKey}&page=1&sessionkey={$sessionKey}";
            $searchResults = json_decode(file_get_contents($search), true);
-
-        //    foreach ($searchResults['Products'] as $data) {
-        //        echo "{$data["Name"]}\n";
-        //    }
-        // } else {
-        //     echo $urlContents->StatusCode;
-        //     echo "\nnot working!";
-        // }
-
            echo json_encode($searchResults);
     }
-}
-);
+});
 
 /* Gets a specific product's details based on a product ID.
 */
 $app->get('/product/', function () {
     $searchKey = Slim\Slim::getInstance()->request()->get('id');
-    // global $tescoUsername, $tescoPass, $tescoDevKey, $tescoAppKey, $sessionKey;
-
     $sessionKey = createSessionKey(); 
-    echo "fjkasdkjaskjdb";
-    echo $sessionKey;
     $productInfoURL = "http://www.techfortesco.com/groceryapi/restservice.aspx?command=PRODUCTSEARCH&searchtext={$searchKey}&extendedinfo=Y&page=1&sessionkey={$sessionKey}";
     $productInfo = json_decode(file_get_contents($productInfoURL), true);
     echo json_encode($productInfo);
@@ -203,6 +223,7 @@ function addProductToDatabase ($productId) {
         $stmt->bindParam(':sugar', $sugar);
         $stmt->execute();
         $db = null;
+        echo "inserted into products";
     } catch (PDOException $e) {
         echo $e->getMessage();
     }
@@ -258,10 +279,11 @@ try {
 */
 $app->get('/productsFromDate', function() {
     $dateKey = Slim\Slim::getInstance()->request()->get('date');
-    $sqlStatement = "SELECT productId, name FROM Products WHERE productId IN (SELECT Products_productId FROM Diary WHERE dateConsumed= {$dateKey})";
+    $sqlStatement = "SELECT productId, name FROM Products WHERE productId IN (SELECT Products_productId FROM Diary WHERE dateConsumed= :date)";
     try {
         $db = getConnection();
         $stmt = $db->prepare($sqlStatement);
+        $stmt->bindParam(':date', $dateKey);
         $stmt->execute();
         $result = $stmt->fetchAll();
         $db = null;
