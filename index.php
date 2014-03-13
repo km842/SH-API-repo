@@ -169,7 +169,6 @@ $app->post(
         $stmt->bindParam(':height', $height);
         $stmt->bindParam(':weight', $weight);
         $stmt->execute();
-
         $db = null;
     } catch (PDOException $e) {
         $e->getMessage();
@@ -186,12 +185,14 @@ function checkProductEntry($productId) {
         $stmt->execute();
         $result = $stmt->fetchAll();
         echo count($result);
-
-        if (count($result == 0)) {
+        echo "here";
+        if (count($result) == 0) {
             //add to database helper method here!
             addProductToDatabase($productId);
+            echo "dfasf";
         }
     } catch (PDOException $e) {
+        echo "executing";
         echo $e->getMessage();
     }
 }
@@ -231,43 +232,69 @@ function addProductToDatabase ($productId) {
 
 /* POST method that inserts an entry into the diary database. CURRENTLY THROWING ERROR FOR SAME PRODUCT AND PERSON ENTRY.
 */
+
+/*Change to reflect database changes here!c*/
 $app->post('/insertIntoDiary', function () use ($app) {
     $request = Slim\Slim::getInstance()->request();
     $entry = json_decode($request->getBody());
     $user = $entry->id;
     $product = $entry->productCode;
     $date = $entry->date;
-    // echo $user;
-    // echo $product;
-    // echo $date;
+    $diaryId;
 
     checkProductEntry($product);
-        $sql = "INSERT INTO Diary (dateConsumed, Products_productId, Person_personId) VALUES (:date, :product, :user)";
+
+    $sql = "SELECT DiaryId FROM Diary WHERE Person_personId = {$user} AND Products_productId = {$product}";
+    try {
+        $db = getConnection();
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        if (!$result) {
+            $insertSql = "INSERT INTO Diary (Products_productId, Person_personId) VALUES (:product, :user)";
+            $insertStmt = $db->prepare($insertSql);
+            $insertStmt->bindParam(':product', $product);
+            $insertStmt->bindParam(':user', $user);
+            $insertStmt->execute();
+            $diaryId = $db->lastInsertId();
+            echo "inserting";
+        } else {
+            $diaryId = $result[0]['DiaryId'];
+            echo "else";
+        }
+        // addToLog($diaryId, $date);
+        echo $diaryId;
         try {
-            $db = getConnection();
-            $stmt = $db->prepare($sql);
-            $stmt->bindParam(':date', $date);
-            $stmt->bindParam(':product', $product);
-            $stmt->bindParam(':user', $user);
-            $stmt->execute();
-            $db = null;
-            echo "inserted";
-        } catch (PDOException $e) {
-             echo $e->getMessage();
-            }
-        
+        $insert2 = "INSERT INTO Log (DiaryId, dateConsumed) VALUES (:diaryId, :date)";
+        $insert2stmt = $db->prepare($insert2);
+        $insert2stmt->bindParam(':date', $date);
+        $insert2stmt->bindParam(':diaryId', $diaryId);
+        $insert2stmt->execute();
+        } catch (PDOException $f) {
+            echo ($f->getMessage());
+            echo "failed";
+        }
+        var_dump ($result);
+        echo($diaryId);
+    } catch (PDOException $e) {
+        echo ($e->getMessage());
+    }
+        $db = null;
     }
 );
+
+
 /*Gets a set of inique dates that the user has used the application
     SEND PERSON ID USING USER DEFAULTS
 */
 $app->get('/getDates', function () {
-$sqlStatement = "SELECT DISTINCT dateConsumed FROM Diary WHERE Person_personId=100 ORDER BY dateConsumed DESC";
+$sqlStatement = "SELECT DISTINCT l.dateConsumed FROM Log l INNER JOIN Diary d ON l.DiaryId = d.DiaryId WHERE Person_personId = 100";
 try {
     $db = getConnection();
     $stmt = $db->prepare($sqlStatement);
     $stmt->execute();
     $result = $stmt->fetchAll();
+    $db = null;
     echo json_encode($result);
 } catch (PDOException $e) {
     echo $e->getMessage();
@@ -279,7 +306,8 @@ try {
 */
 $app->get('/productsFromDate', function() {
     $dateKey = Slim\Slim::getInstance()->request()->get('date');
-    $sqlStatement = "SELECT productId, name FROM Products WHERE productId IN (SELECT Products_productId FROM Diary WHERE dateConsumed= :date)";
+    $sqlStatement = "SELECT p.productId, p.name FROM Products p INNER JOIN Diary d ON p.productId = d.Products_productId
+    INNER JOIN Log l ON d.DiaryId = l.DiaryId WHERE d.Person_personId = 100 AND l.dateConsumed = {$date}";
     try {
         $db = getConnection();
         $stmt = $db->prepare($sqlStatement);
@@ -292,26 +320,5 @@ $app->get('/productsFromDate', function() {
         $e->getMessage();
     }
 });
-
-// PUT route
-$app->put(
-    '/put',
-    function () {
-        echo 'This is a PUT route';
-    }
-);
-
-// PATCH route
-$app->patch('/patch', function () {
-    echo 'This is a PATCH route';
-});
-
-// DELETE route
-$app->delete(
-    '/delete',
-    function () {
-        echo 'This is a DELETE route';
-    }
-);
 
 $app->run();
