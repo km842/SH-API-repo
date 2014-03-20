@@ -184,12 +184,13 @@ function checkProductEntry($productId) {
         $stmt = $db->prepare($sqlStatement);
         $stmt->execute();
         $result = $stmt->fetchAll();
-        echo count($result);
-        echo "here";
+        // echo count($result);
+        // echo "here";
+        // method working!!!!!
         if (count($result) == 0) {
             //add to database helper method here!
-            addProductToDatabase($productId);
-            echo "dfasf";
+            addProductToDatabase($productId); 
+            echo "added";
         }
     } catch (PDOException $e) {
         echo "executing";
@@ -202,18 +203,22 @@ function addProductToDatabase ($productId) {
     $sessionKey = createSessionKey();
     $productInfoURL = "http://www.techfortesco.com/groceryapi/restservice.aspx?command=PRODUCTSEARCH&searchtext={$productId}&extendedinfo=Y&page=1&sessionkey={$sessionKey}";
     $result = json_decode(file_get_contents($productInfoURL));
+    // echo json_encode($result);
+    if (isset($result->Products[0]->Name)) {
     $name = $result->Products[0]->Name;
     $calories = $result->Products[0]->RDA_Calories_Count;
     $salt = $result->Products[0]->RDA_Salt_Grammes;
     $fat = $result->Products[0]->RDA_Fat_Grammes;
     $satFat = $result->Products[0]->RDA_Saturates_Grammes;
     $sugar = $result->Products[0]->RDA_Sugar_Grammes;
+    echo $result->Products[0]->RDA_Sugar_Grammes;
 
     $sql = "INSERT INTO Products (productId, name, calories, salt, fat, saturates, sugar) VALUES (:id, :name, :calories,
-        :salt, :fat, :satFat, :sugar)";
+         :salt, :fat, :satFat, :sugar)";
 
     try {
         $db = getConnection();
+        echo "get";
         $stmt = $db->prepare($sql);
         $stmt->bindParam(':id', $productId);
         $stmt->bindParam(':name', $name);
@@ -227,7 +232,11 @@ function addProductToDatabase ($productId) {
         echo "inserted into products";
     } catch (PDOException $e) {
         echo $e->getMessage();
+        }
+    } else {
+        echo "hacked";
     }
+
 }
 
 /* POST method that inserts an entry into the diary database. CURRENTLY THROWING ERROR FOR SAME PRODUCT AND PERSON ENTRY.
@@ -244,44 +253,70 @@ $app->post('/insertIntoDiary', function () use ($app) {
 
     checkProductEntry($product);
 
-    $sql = "SELECT DiaryId FROM Diary WHERE Person_personId = {$user} AND Products_productId = {$product}";
+    echo "{$user}\n{$product} \n{$date}";
+
+
+    $sql = "SELECT DiaryId FROM Diary WHERE Person_personId = '{$user}' AND Products_productId = {$product}";
     try {
         $db = getConnection();
         $stmt = $db->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll();
+        var_dump($result);
         if (!$result) {
+            echo "broken in here";
+
             $insertSql = "INSERT INTO Diary (Products_productId, Person_personId) VALUES (:product, :user)";
+            echo $user;
+            echo "{$product}";
             $insertStmt = $db->prepare($insertSql);
             $insertStmt->bindParam(':product', $product);
-            $insertStmt->bindParam(':user', $user);
+            $insertStmt->bindParam(':user', $user, PDO::PARAM_STR, 36);
             $insertStmt->execute();
+            echo "broken";
             $diaryId = $db->lastInsertId();
-            echo "inserting";
+            echo "{$diaryId}";
         } else {
+            echo "now here";
             $diaryId = $result[0]['DiaryId'];
-            echo "else";
+            // echo "else";
         }
-        // addToLog($diaryId, $date);
-        echo $diaryId;
-        try {
-        $insert2 = "INSERT INTO Log (DiaryId, dateConsumed) VALUES (:diaryId, :date)";
-        $insert2stmt = $db->prepare($insert2);
-        $insert2stmt->bindParam(':date', $date);
-        $insert2stmt->bindParam(':diaryId', $diaryId);
-        $insert2stmt->execute();
-        } catch (PDOException $f) {
-            echo ($f->getMessage());
-            echo "failed";
-        }
-        var_dump ($result);
-        echo($diaryId);
+         addToLog($diaryId, $date, $db);
+    //     echo $diaryId;
+    //     try {
+    //     $insert2 = "INSERT INTO Log (DiaryId, dateConsumed) VALUES (:diaryId, :date)";
+    //     $insert2stmt = $db->prepare($insert2);
+    //     $insert2stmt->bindParam(':date', $date);
+    //     $insert2stmt->bindParam(':diaryId', $diaryId);
+    //     $insert2stmt->execute();
+    //     } catch (PDOException $f) {
+    //         echo "FAiling hard";
+    //         echo ($f->getMessage());
+    //         echo "failed";
+    //     }
+    //     var_dump ($result);
+    //     echo($diaryId);
     } catch (PDOException $e) {
         echo ($e->getMessage());
     }
-        $db = null;
+    //     $db = null;
+});
+
+function addToLog($diaryId, $dateConsumed, $db) {
+    echo "\n{$diaryId}\n{$dateConsumed}";
+    $sql = "INSERT INTO Log (DiaryId, dateConsumed) VALUES (:diaryId, :date)";
+    
+    try {
+        echo "loggin";
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':date', $dateConsumed, PDO::PARAM_STR, 12);
+        $stmt->bindParam(':diaryId', $diaryId);
+        $stmt->execute();
+    } catch (PDOException $e) {
+        echo $e->getMessage();
     }
-);
+
+}
 
 
 /*Gets a set of inique dates that the user has used the application
@@ -319,6 +354,11 @@ $app->get('/productsFromDate', function() {
     } catch (PDOException $e) {
         $e->getMessage();
     }
+});
+
+$app->get('/test', function() {
+   $db = getConnection();
+   addToLog(27, '2011-11-11', $db);
 });
 
 $app->run();
