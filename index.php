@@ -6,14 +6,8 @@ require 'Slim/Slim.php';
 
 
 /**
- * 1.) Get a list of all objects based on user search. DONE
- * 2.) Insert user into  a the database using key. DONE
- * 3.) Insert diary entry. TODO
- * 4.) Config files outside of directory for passwords, logins etc.
- * 5.) Alter database to allow multiple entries of products on the same day - currently throwing error!
-
- MAke dummy test tesco account!
- */
+	Food Nudge API
+*/
 $app = new \Slim\Slim();
 
 /*
@@ -23,6 +17,8 @@ Add connection checking etc! Respond with status messages TODO!!!!!
 /*
 Global variables - need to be moved to a higher directory for security!!!!
 */
+
+/*All the variables are self documenting by name*/
 
 $sessionKey;
 $tescoUsername = "kunal.mandalia@hotmail.com";
@@ -40,7 +36,7 @@ $googleApiKey = "AIzaSyCK7y0TT49xIi3IafMxbsmvrykDLlYNpMA";
 */
 
 /*Creates connection to database
-NEEDS TO RETURN STATUS MESSAGE!
+Returns a dataabsae connection.
 */
 function getConnection () {
     global $hostName, $sqlUsername, $password, $schemaName;
@@ -58,6 +54,7 @@ function getConnection () {
 
 
 /*Create session key for tesco api
+Returns an instance of a session key that update the global session keyy variable.
 */
 function createSessionKey () {
     global $tescoUsername, $tescoPass, $tescoDevKey, $tescoAppKey, $sessionKey;
@@ -76,6 +73,9 @@ function destroyConnection ($db) {
     $db = null;
 }
 
+/*Gets all 60 location references from Google
+Params: latitude, longitude, max results, and the next token.
+Returns an array of location references.*/
 function getAllReferences ($latitude, $longitude, $maxResults = 60, $nextToken = false) {
     global $googleApiKey;
 
@@ -112,7 +112,8 @@ $app->get('/locations/', function() {
 });
 
 
-/*GET methods that returns a list of products based on a search parameter - a id or text*/
+/*GET methods that returns a list of products based on a search parameter - a id or text
+Returns json of products.*/
 $app->get(
     '/hello/',
     function () {
@@ -134,6 +135,7 @@ $app->get(
 });
 
 /* Gets a specific product's details based on a product ID.
+Returns json of product details.
 */
 $app->get('/product/', function () {
     $searchKey = Slim\Slim::getInstance()->request()->get('id');
@@ -198,6 +200,8 @@ function checkProductEntry($productId) {
     }
 }
 
+/*Helper method that adds a product to the database.
+*/
 function addProductToDatabase ($productId) {
     //get data from tesco and then add to database
     $sessionKey = createSessionKey();
@@ -239,10 +243,8 @@ function addProductToDatabase ($productId) {
 
 }
 
-/* POST method that inserts an entry into the diary database. CURRENTLY THROWING ERROR FOR SAME PRODUCT AND PERSON ENTRY.
+/* POST method that inserts an entry into the diary database. 
 */
-
-/*Change to reflect database changes here!c*/
 $app->post('/insertIntoDiary', function () use ($app) {
     $request = Slim\Slim::getInstance()->request();
     $entry = json_decode($request->getBody());
@@ -302,6 +304,7 @@ $app->post('/insertIntoDiary', function () use ($app) {
     //     $db = null;
 });
 
+/*Inserts product and user data into the database*/
 function addToLog($diaryId, $dateConsumed, $db) {
     echo "\n{$diaryId}\n{$dateConsumed}";
     $sql = "INSERT INTO Log (DiaryId, dateConsumed) VALUES (:diaryId, :date)";
