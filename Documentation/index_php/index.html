@@ -1,0 +1,826 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/1998/REC-html40-19980424/loose.dtd">
+<html>
+<head>
+<title>index.php</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content="HeaderDoc">
+<meta name="xcode-display" content="render">
+<style type="text/css"><!--.char {background: #ffffff; color:#0000ff;}.comment {background:#ffffff; color:#236e25}.function {background:#ffffff; color:#000000;}.keyword {background:#ffffff; color:#761550;}.number {background: #ffffff; color:#0000ff;}.param {background:#ffffff; color:#000000;}.preprocessor {background:#ffffff; color:#236e25}.string {background: #ffffff; color:#891315;}.template {background:#ffffff; color:#761550;}.type {background:#ffffff; color:#761550;}.var {background:#ffffff; color:#000000;}body {border: 0px; margin: 0px;}div {font-size: 10pt; text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #000000;}td {font-size: 10pt; text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #000000;}span.hd_tocAccessSpace { display: block; font-size: 1px; height: 3px; min-height: 3px; }span.hd_tocGroupSpace { display: block; font-size: 1px; height: 3px; min-height: 3px; }span.hd_tocGroup { display: block; font-weight: bold; font-size: 10pt; text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #000000; margin-left: 0px; padding-left: 40px; }span.hd_tocGroup + span.hd_tocAccess { padding-top: 5px; }td.toc_contents_text {font-size: 11pt; text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #000000; }li.tocSubEntry {font-size: 11pt; text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #000000;}p {font-size: 10pt; text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #000000;}a:link {text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #36c;}a:visited {text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #36c;}a:visited:hover {text-decoration: underline; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #36c;}a:active {text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #36c;}a:hover {text-decoration: underline; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #36c;}h2.h2tight { margin-top: 0px; padding-top: 0px; }h1 { margin-top: 13px; padding-top: 0px; }h4 {text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; font-size: tiny; font-weight: bold;}h5 {text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; font-size: 10.1pt; font-weight: bold;}pre {text-decoration: none; font-family: Courier, Consolas, monospace; color: #666; font-size: 10pt;}pre a { font-family: Courier, Consolas, monospace; color: #666;font-size: 10pt;}pre a:link { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}pre a:visited { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}pre a:visited:hover { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}pre a:active { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}pre a:hover { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}code {text-decoration: none; font-family: Courier, Consolas, monospace; color: #666;font-size: 10pt;}code a { font-family: Courier, Consolas, monospace; color: #666;font-size: 10pt;}code a:link { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}code a:visited { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}code a:visited:hover { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}code a:active { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}code a:hover { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}tt {text-decoration: none; font-family: Courier, Consolas, monospace; color: #666;font-size: 10pt;}tt a { font-family: Courier, Consolas, monospace; color: #666;font-size: 10pt;}tt a:link { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}tt a:visited { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}tt a:visited:hover { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}tt a:active { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}tt a:hover { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}body  {text-decoration: none; font-family: Courier, Consolas, monospace; color: #666;font-size: 10pt; padding-left: 0px; padding-top: 0px; margin-left: 0px; margin-top: 0px; border: none; }#hd_outermost_table { margin-left: 0px; border-spacing: 0px; margin-top: 0px; padding-left: 0px; padding-top: 0px; border: none; }#hd_outermost_table > tr { border-spacing: 0px; margin-left: 0px; margin-top: 0px; padding-left: 0px; padding-top: 0px; border: none; }#hd_outermost_table > tr > td { border-spacing: 0px; margin-left: 0px; margin-top: 0px; }#hd_outermost_table > tbody > tr { border-spacing: 0px; margin-left: 0px; margin-top: 0px; padding-left: 0px; padding-top: 0px; border: none; }#hd_outermost_table > tbody > tr > td { border-spacing: 0px; margin-left: 0px; margin-top: 0px; padding-top: 3px; }.afterName { display: none; }.list_indent { margin-left: 40px; }.declaration_indent { margin-left: 40px; margin-top: 0px; margin-bottom: 0px; padding-top: 0px; padding-bottom: 0px; min-height: 12px; vertical-align: middle; }.declaration_indent pre { margin-top: 20px; padding-top: 0px; margin-bottom: 20px; padding-bottom: 0px; }.gapBeforeFooter { display: none; }hr { height: 0px; min-height: 0px; border-top: none; border-left: none; border-right: none; border-bottom: 1px solid #909090;}hr.afterHeader { display: none }.param_group_indent { margin-left: 25px; }.param_indent { margin-left: 40px; margin-top: 0px; padding-top: 0px; }.param_indent dl { margin-top: 4px; padding-top: 0px; }dl dd > p:first-child { margin-top: 2px; padding-top: 0px; }.param_indent dl dd > p:first-child { margin-top: 2px; padding-top: 0px; }.group_indent { margin-left: 40px; }.group_desc_indent { margin-left: 20px; }.warning_indent { margin-left: 40px; }.important_indent { margin-left: 40px; }.note_indent { margin-left: 40px; }h3 {       color: #3C4C6C;}.tight {       margin-top: 2px; margin-bottom: 0px;       padding-top: 0px; padding-bottom: 0px;}h3 a {       color: #3C4C6C;	font-size: 16px;	font-style: normal;	font-variant: normal;	font-weight: bold;	height: 0px;	line-height: normal;}.hd_tocAccess { display: block; margin-left: 40px; font-style: italic; font-size: 10px; font-weight: normal; color: #303030; }.tocSubheading { margin-bottom: 4px; }--></style>
+<style><!--
+body {
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+}
+.toc_contents_text {
+    padding-left: 1em;
+    text-indent: -1em;
+}
+
+ul.tocSubEntryList li.tocSubEntry {
+    list-style: none;
+}
+
+#colorbox {
+		display: none;
+}
+.spec_sheet_line {
+		margin-bottom: 1px;
+}
+.collapsible {
+		display: none;
+}
+.toc_leadspace {
+		width: 10; min-width: 10;
+}
+.disclosure_triangle_td {
+		width: 14; min-width: 14;
+		font-size: 10px;
+		vertical-align: middle;
+}
+.specbox td {
+		font-size: 13px;
+}
+.specbox td a {
+		font-size: 13px;
+}
+.specbox td code {
+		font-size: 13px;
+}
+.specbox td tt {
+		font-size: 13px;
+}
+.specbox td pre {
+		font-size: 13px;
+}
+.specbox a {
+		font-size: 12px;
+}
+.disclosure_triangle_td a {
+		text-decoration: none;
+}
+.disclosure_triangle_td a:link {
+		text-decoration: none;
+}
+.disclosure_triangle_td a:active {
+		text-decoration: none;
+}
+.disclosure_triangle_td a:visited:hover {
+		text-decoration: none;
+}
+.disclosure_triangle_td a:hover {
+		text-decoration: none;
+}
+.hd_toc_box {
+		padding-top: 10px;
+		padding-right: 15px;
+}.tocSeparator {
+		margin-top: 15px;
+		padding-bottom: 0px;
+		margin-bottom: 0px;
+}
+.tocSubEntryList {
+		margin-left: 0px;
+		padding-left: 40px;
+		padding-top: 0px;
+		margin-top: 2px;
+		padding-bottom: 0px;
+		margin-bottom: 8px;
+}
+.hd_toc_heading_table {
+		margin-top: 2px;
+		margin-bottom: 2px;
+}
+.hd_toc_entry_table {
+		margin-top: 2px;
+		margin-bottom: 2px;
+}
+.tocSubEntry {
+		margin-left: 0px;
+		padding-left: 0px;
+		margin-top: 0px;
+		margin-bottom: 1px;
+}
+.tocSubEntry a {
+		font-size: 10pt;
+}
+.tocSubheading {
+		padding-left: 14px;
+		margin-left: 0px;
+		margin-top: 5px;
+		padding-top: 0px;
+		font-size: 16px;
+		color: #808080;
+}
+
+#hd_outermost_table { margin-left: 0px; border-spacing: 0px; margin-top: 0px; padding-left: 0px; padding-top: 0px; border: none; }
+#hd_outermost_table > tr { border-spacing: 0px; margin-left: 0px; margin-top: 0px; padding-left: 0px; padding-top: 0px; border: none; }
+#hd_outermost_table > tr > td { border-spacing: 0px; margin-left: 0px; margin-top: 0px; }
+#hd_outermost_table > tbody > tr { border-spacing: 0px; margin-left: 0px; margin-top: 0px; padding-left: 0px; padding-top: 0px; border: none; }
+#hd_outermost_table > tbody > tr > td { border-spacing: 0px; margin-left: 0px; margin-top: 0px; padding-top: 3px; }
+
+#tocMenu {
+		border-right: 1px solid #c0c0c0;
+		background-color: #f4f4ff;
+		top:0px;
+		left:0px;
+		width:230px;
+		height:100%;
+}
+#bodyContents {
+		width: auto;
+		padding-left: 15px;
+}
+--></style>
+<style id="disable_before_iOS_5"><!--
+#tocMenu {
+		position: fixed;
+		height: 100%;
+		overflow: auto;
+}
+#bodyContents {
+		width: auto;
+		left: 235px;
+		right: 0;
+		padding-left: 15px;
+		position: fixed;
+		height: 100%;
+		overflow-y: scroll;
+}
+--></style>
+<script language="JavaScript" type="text/javascript"><!--
+    if (navigator.platform && (navigator.platform.match(/iPad/) || navigator.platform.match(/iPhone/) || navigator.platform.match(/iPod/))) {
+        if (navigator.userAgent.match(/OS 1(_\d)+/) ||
+            navigator.userAgent.match(/OS 2(_\d)+/) ||
+            navigator.userAgent.match(/OS 3(_\d)+/) ||
+            navigator.userAgent.match(/OS 4(_\d)+/)) {
+                /* Earlier iOS versions require different scrolling gestures with position: fixed. */
+                var del_style_elt = document.getElementById("disable_before_iOS_5");
+                if (del_style_elt) del_style_elt.parentNode.removeChild(del_style_elt);
+        }
+    }
+// --></script><script language="JavaScript" type="text/javascript"><!--
+function getNewHTTPObject()
+{
+        var xmlhttp;
+
+        /** Special IE only code ... */
+        /*@cc_on
+          @if (@_jscript_version >= 5)
+              try
+              {
+                  xmlhttp = new ActiveXObject('Msxml2.XMLHTTP');
+              }
+              catch (e)
+              {
+                  try
+                  {
+                      xmlhttp = new ActiveXObject('Microsoft.XMLHTTP');
+                  }
+                  catch (E)
+                  {
+                      xmlhttp = false;
+                  }
+             }
+          @else
+             xmlhttp = false;
+        @end @*/
+
+        /** Every other browser on the planet */
+        if (!xmlhttp && typeof XMLHttpRequest != 'undefined')
+        {
+            try
+            {
+                xmlhttp = new XMLHttpRequest();
+            }
+            catch (e)
+            {
+                xmlhttp = false;
+            }
+        }
+
+        return xmlhttp;
+}
+
+function hidetoc() {
+	var toc = document.getElementById('tocMenu');
+	var src = toc.getAttribute('src');
+	var xhr = getNewHTTPObject();
+	xhr.open('GET', src, true);
+	xhr.onreadystatechange = function() {
+		if(xhr.readyState == 4) {
+			var toc = document.getElementById('tocMenu');
+			toc.innerHTML = xhr.responseText;
+		}
+	}
+	xhr.send(null);
+	var origURL = parent.document.URL;
+	var contentURL = origURL.substring(origURL.indexOf('?')+1, origURL.length);
+	if (contentURL.length == origURL.length) {
+		jumpPos = origURL.substring(origURL.indexOf('#')+1, origURL.length);
+	}
+	if (contentURL == "hidetoc") {
+		var body = document.getElementById('bodyContents');
+		if (toc && body) {
+			toc.style.display = 'none';
+			body.style.marginLeft = '0px';
+		}
+	}
+}
+
+function disclosure_triangle(elt) {
+   var linkelt = elt;
+   while (elt && elt.tagName != 'TABLE') { elt = elt.parentNode;}
+   if (!elt) { return; }
+   while (elt && elt.tagName != 'DIV') { elt = elt.nextSibling;}
+   if (!elt) { return; }
+   if (parseInt(linkelt.getAttribute('state'))) {
+      // It's open.  Close it
+      linkelt.innerHTML = '&#x25B7;';
+      linkelt.setAttribute('state', 0);
+      linkelt.setAttribute('class', 'closed_disclosure_triangle');
+      elt.style.display = 'none';
+   } else {
+      // It's closed.  Open it
+      linkelt.innerHTML = '&#x25BC;';
+      linkelt.setAttribute('state', 1);
+      linkelt.setAttribute('class', 'open_disclosure_triangle');
+      elt.style.display = 'block';
+   }
+}
+--></script><style type="text/css"><!--.char {background: #ffffff; color:#0000ff;}.comment {background:#ffffff; color:#236e25}.function {background:#ffffff; color:#000000;}.keyword {background:#ffffff; color:#761550;}.number {background: #ffffff; color:#0000ff;}.param {background:#ffffff; color:#000000;}.preprocessor {background:#ffffff; color:#236e25}.string {background: #ffffff; color:#891315;}.template {background:#ffffff; color:#761550;}.type {background:#ffffff; color:#761550;}.var {background:#ffffff; color:#000000;}body {border: 0px; margin: 0px;}div {font-size: 10pt; text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #000000;}td {font-size: 10pt; text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #000000;}span.hd_tocAccessSpace { display: block; font-size: 1px; height: 3px; min-height: 3px; }span.hd_tocGroupSpace { display: block; font-size: 1px; height: 3px; min-height: 3px; }span.hd_tocGroup { display: block; font-weight: bold; font-size: 10pt; text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #000000; margin-left: 0px; padding-left: 40px; }span.hd_tocGroup + span.hd_tocAccess { padding-top: 5px; }td.toc_contents_text {font-size: 11pt; text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #000000; }li.tocSubEntry {font-size: 11pt; text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #000000;}p {font-size: 10pt; text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #000000;}a:link {text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #36c;}a:visited {text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #36c;}a:visited:hover {text-decoration: underline; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #36c;}a:active {text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #36c;}a:hover {text-decoration: underline; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #36c;}h2.h2tight { margin-top: 0px; padding-top: 0px; }h1 { margin-top: 13px; padding-top: 0px; }h4 {text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; font-size: tiny; font-weight: bold;}h5 {text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; font-size: 10.1pt; font-weight: bold;}pre {text-decoration: none; font-family: Courier, Consolas, monospace; color: #666; font-size: 10pt;}pre a { font-family: Courier, Consolas, monospace; color: #666;font-size: 10pt;}pre a:link { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}pre a:visited { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}pre a:visited:hover { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}pre a:active { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}pre a:hover { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}code {text-decoration: none; font-family: Courier, Consolas, monospace; color: #666;font-size: 10pt;}code a { font-family: Courier, Consolas, monospace; color: #666;font-size: 10pt;}code a:link { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}code a:visited { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}code a:visited:hover { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}code a:active { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}code a:hover { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}tt {text-decoration: none; font-family: Courier, Consolas, monospace; color: #666;font-size: 10pt;}tt a { font-family: Courier, Consolas, monospace; color: #666;font-size: 10pt;}tt a:link { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}tt a:visited { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}tt a:visited:hover { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}tt a:active { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}tt a:hover { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}body  {text-decoration: none; font-family: Courier, Consolas, monospace; color: #666;font-size: 10pt; padding-left: 0px; padding-top: 0px; margin-left: 0px; margin-top: 0px; border: none; }#hd_outermost_table { margin-left: 0px; border-spacing: 0px; margin-top: 0px; padding-left: 0px; padding-top: 0px; border: none; }#hd_outermost_table > tr { border-spacing: 0px; margin-left: 0px; margin-top: 0px; padding-left: 0px; padding-top: 0px; border: none; }#hd_outermost_table > tr > td { border-spacing: 0px; margin-left: 0px; margin-top: 0px; }#hd_outermost_table > tbody > tr { border-spacing: 0px; margin-left: 0px; margin-top: 0px; padding-left: 0px; padding-top: 0px; border: none; }#hd_outermost_table > tbody > tr > td { border-spacing: 0px; margin-left: 0px; margin-top: 0px; padding-top: 3px; }.afterName { display: none; }.list_indent { margin-left: 40px; }.declaration_indent { margin-left: 40px; margin-top: 0px; margin-bottom: 0px; padding-top: 0px; padding-bottom: 0px; min-height: 12px; vertical-align: middle; }.declaration_indent pre { margin-top: 20px; padding-top: 0px; margin-bottom: 20px; padding-bottom: 0px; }.gapBeforeFooter { display: none; }hr { height: 0px; min-height: 0px; border-top: none; border-left: none; border-right: none; border-bottom: 1px solid #909090;}hr.afterHeader { display: none }.param_group_indent { margin-left: 25px; }.param_indent { margin-left: 40px; margin-top: 0px; padding-top: 0px; }.param_indent dl { margin-top: 4px; padding-top: 0px; }dl dd > p:first-child { margin-top: 2px; padding-top: 0px; }.param_indent dl dd > p:first-child { margin-top: 2px; padding-top: 0px; }.group_indent { margin-left: 40px; }.group_desc_indent { margin-left: 20px; }.warning_indent { margin-left: 40px; }.important_indent { margin-left: 40px; }.note_indent { margin-left: 40px; }h3 {       color: #3C4C6C;}.tight {       margin-top: 2px; margin-bottom: 0px;       padding-top: 0px; padding-bottom: 0px;}h3 a {       color: #3C4C6C;	font-size: 16px;	font-style: normal;	font-variant: normal;	font-weight: bold;	height: 0px;	line-height: normal;}.hd_tocAccess { display: block; margin-left: 40px; font-style: italic; font-size: 10px; font-weight: normal; color: #303030; }.tocSubheading { margin-bottom: 4px; }--></style>
+</head>
+<body bgcolor="#ffffff" onload="hidetoc();">
+<!-- headerDoc=Header;  uid=//apple_ref/doc/header/index.php;   name=index.php -->
+<a name="//apple_ref/doc/header/index.php"></a>
+<table id="hd_outermost_table" height="100%" width="100%"><tr>
+<td valign="top" id="tocMenu" src="toc.html"></td>
+<td id="bodyContents" valign="top">
+<a name="top"></a>
+<h1><a name="index.php">index.php</a></h1>
+<h2>Introduction</h2>
+<p><!-- headerDoc=abstract;uid=//apple_ref/doc/header/index.php;name=start --><!-- begin abstract -->Use the links in the table of contents to the left to access the documentation.<br><!-- end abstract --><!-- headerDoc=abstract;uid=//apple_ref/doc/header/index.php;name=end --></p>
+<hr class="afterClassOrHeaderInfo">
+<br><a name="HeaderDoc_classes"></a>
+<h2 class="h2tight">Classes</h2>
+<dl>
+<dt><tt><a href="Classes/app/index.html#//apple_ref/php/cl/app" target="_top">app</a></tt></dt>
+<dd></dd>
+</dl>
+<hr class="afterClassEmbeddedTOC">
+<br><a name="HeaderDoc_functions"></a>
+<h2 class="h2tight">Functions</h2>
+<dl>
+<dt><tt><a href="index.html#//apple_ref/php/func/addProductToDatabase" target="_top">addProductToDatabase</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//apple_ref/php/func/addToLog" target="_top">addToLog</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//apple_ref/php/func/checkProductEntry" target="_top">checkProductEntry</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//apple_ref/php/func/createSessionKey" target="_top">createSessionKey</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//apple_ref/php/func/destroyConnection" target="_top">destroyConnection</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//apple_ref/php/func/get_DONTLINK_2" target="_top">get</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//apple_ref/php/func/get" target="_top">get()</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//apple_ref/php/func/get_DONTLINK_1" target="_top">get()</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//apple_ref/php/func/getAllReferences" target="_top">getAllReferences</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//apple_ref/php/func/getConnection" target="_top">getConnection</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//apple_ref/doc/title:func/hello" target="_top">hello</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//apple_ref/doc/title:func/insertIntoDiary" target="_top">insertIntoDiary</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//apple_ref/doc/title:func/locations" target="_top">locations</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//apple_ref/php/func/post" target="_top">post()</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//apple_ref/php/func/post_DONTLINK_1" target="_top">post()</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//apple_ref/doc/title:func/product" target="_top">product</a></tt></dt>
+<dd></dd>
+</dl>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//apple_ref/php/func/addProductToDatabase;   name=addProductToDatabase --><a name="//apple_ref/php/func/addProductToDatabase"></a>
+<h3><a name="addProductToDatabase">addProductToDatabase</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//apple_ref/php/func/addProductToDatabase;name=start --><span class="keyword">function</span> <a machinegenerated="true" href="index.html#//apple_ref/php/func/addProductToDatabase" logicalPath="//apple_ref/php/instm/addProductToDatabase //apple_ref/php/clm/addProductToDatabase //apple_ref/php/intfcm/addProductToDatabase //apple_ref/php/intfm/addProductToDatabase //apple_ref/php/func/addProductToDatabase" target="_top"><span class="function">addProductToDatabase</span></a> (
+    $<span class="param">productId</span>) <!-- headerDoc=declaration;uid=//apple_ref/php/func/addProductToDatabase;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Parameters</font></h5>
+<div class="param_indent">
+<dl>
+<dt>
+<!-- headerDoc=functionparam;  uid=//apple_ref/doc/functionparam/addProductToDatabase/productId;   name=addProductToDatabase::productId -->
+<a name="//apple_ref/doc/functionparam/addProductToDatabase/productId"></a>
+<code>productId</code>
+</dt>
+<dd><p>The product ID of the product to be added to the database.</p></dd>
+</dl>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Return Value</font></h5>
+<p><!-- begin return value --></p>
+<p>Returns a JSON encoded array to the user.
+
+<!-- end return value --></p>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//apple_ref/php/func/addToLog;   name=addToLog --><a name="//apple_ref/php/func/addToLog"></a>
+<h3><a name="addToLog">addToLog</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//apple_ref/php/func/addToLog;name=start --><span class="keyword">function</span> <a machinegenerated="true" href="index.html#//apple_ref/php/func/addToLog" logicalPath="//apple_ref/php/instm/addToLog //apple_ref/php/clm/addToLog //apple_ref/php/intfcm/addToLog //apple_ref/php/intfm/addToLog //apple_ref/php/func/addToLog" target="_top"><span class="function">addToLog</span></a>(
+    $<span class="param">diaryId</span>,
+    $<span class="param">dateConsumed</span>,
+    $<span class="param">db</span>) <!-- headerDoc=declaration;uid=//apple_ref/php/func/addToLog;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Parameters</font></h5>
+<div class="param_indent">
+<dl>
+<dt>
+<!-- headerDoc=functionparam;  uid=//apple_ref/doc/functionparam/addToLog/diaryId;   name=addToLog::diaryId -->
+<a name="//apple_ref/doc/functionparam/addToLog/diaryId"></a>
+<code>diaryId</code>
+</dt>
+<dd><p>The diary id of the product and user.</p></dd>
+<dt>
+<!-- headerDoc=functionparam;  uid=//apple_ref/doc/functionparam/addToLog/dateConsumed;   name=addToLog::dateConsumed -->
+<a name="//apple_ref/doc/functionparam/addToLog/dateConsumed"></a>
+<code>dateConsumed</code>
+</dt>
+<dd><p>The date that the product was consumed.</p></dd>
+<dt>
+<!-- headerDoc=functionparam;  uid=//apple_ref/doc/functionparam/addToLog/db;   name=addToLog::db -->
+<a name="//apple_ref/doc/functionparam/addToLog/db"></a>
+<code>db</code>
+</dt>
+<dd><p>The database object required to perform database options.</p></dd>
+</dl>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Return Value</font></h5>
+<p><!-- begin return value --></p>
+<p>Returns a JSON encoded array to the user.
+
+<!-- end return value --></p>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//apple_ref/php/func/checkProductEntry;   name=checkProductEntry --><a name="//apple_ref/php/func/checkProductEntry"></a>
+<h3><a name="checkProductEntry">checkProductEntry</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//apple_ref/php/func/checkProductEntry;name=start --><span class="keyword">function</span> <a machinegenerated="true" href="index.html#//apple_ref/php/func/checkProductEntry" logicalPath="//apple_ref/php/instm/checkProductEntry //apple_ref/php/clm/checkProductEntry //apple_ref/php/intfcm/checkProductEntry //apple_ref/php/intfm/checkProductEntry //apple_ref/php/func/checkProductEntry" target="_top"><span class="function">checkProductEntry</span></a>(
+    $<span class="param">productId</span>) <!-- headerDoc=declaration;uid=//apple_ref/php/func/checkProductEntry;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Parameters</font></h5>
+<div class="param_indent">
+<dl>
+<dt>
+<!-- headerDoc=functionparam;  uid=//apple_ref/doc/functionparam/checkProductEntry/productId;   name=checkProductEntry::productId -->
+<a name="//apple_ref/doc/functionparam/checkProductEntry/productId"></a>
+<code>productId</code>
+</dt>
+<dd><p>The product id of the product to be checked.</p></dd>
+</dl>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Return Value</font></h5>
+<p><!-- begin return value --></p>
+<p>Nothing
+
+<!-- end return value --></p>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//apple_ref/php/func/createSessionKey;   name=createSessionKey --><a name="//apple_ref/php/func/createSessionKey"></a>
+<h3><a name="createSessionKey">createSessionKey</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//apple_ref/php/func/createSessionKey;name=start --><span class="keyword">function</span> <a machinegenerated="true" href="index.html#//apple_ref/php/func/createSessionKey" logicalPath="//apple_ref/php/instm/createSessionKey //apple_ref/php/clm/createSessionKey //apple_ref/php/intfcm/createSessionKey //apple_ref/php/intfm/createSessionKey //apple_ref/php/func/createSessionKey" target="_top"><span class="function">createSessionKey</span></a> () <!-- headerDoc=declaration;uid=//apple_ref/php/func/createSessionKey;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Return Value</font></h5>
+<p><!-- begin return value --></p>
+<p>Returns an instance of a session key that updates the global sessionKey variable.
+
+<!-- end return value --></p>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//apple_ref/php/func/destroyConnection;   name=destroyConnection --><a name="//apple_ref/php/func/destroyConnection"></a>
+<h3><a name="destroyConnection">destroyConnection</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//apple_ref/php/func/destroyConnection;name=start --><span class="keyword">function</span> <a machinegenerated="true" href="index.html#//apple_ref/php/func/destroyConnection" logicalPath="//apple_ref/php/instm/destroyConnection //apple_ref/php/clm/destroyConnection //apple_ref/php/intfcm/destroyConnection //apple_ref/php/intfm/destroyConnection //apple_ref/php/func/destroyConnection" target="_top"><span class="function">destroyConnection</span></a> (
+    $<span class="param">db</span>) <!-- headerDoc=declaration;uid=//apple_ref/php/func/destroyConnection;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Parameters</font></h5>
+<div class="param_indent">
+<dl>
+<dt>
+<!-- headerDoc=functionparam;  uid=//apple_ref/doc/functionparam/destroyConnection/db;   name=destroyConnection::db -->
+<a name="//apple_ref/doc/functionparam/destroyConnection/db"></a>
+<code>db</code>
+</dt>
+<dd><p>An instance of the database that should be nulled.</p></dd>
+</dl>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Return Value</font></h5>
+<p><!-- begin return value --></p>
+<p>A null connection. 
+
+<!-- end return value --></p>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//apple_ref/php/func/get_DONTLINK_2;   name=get --><a name="//apple_ref/php/func/get_DONTLINK_2"></a>
+<h3><a name="get">get</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//apple_ref/php/func/get_DONTLINK_2;name=start -->$<!-- a logicalPath="//apple_ref/php/econst/app //apple_ref/php/data/app //apple_ref/php/clconst/app " machineGenerated="true" --><span class="var">app</span><!-- /a -->-&gt;<a machinegenerated="true" href="index.html#//apple_ref/php/func/get" logicalPath="//apple_ref/php/instm/get //apple_ref/php/clm/get //apple_ref/php/intfcm/get //apple_ref/php/intfm/get //apple_ref/php/func/get" target="_top"><span class="function">get</span></a>(
+    '/<span class="char">product</span>/',
+    <span class="keyword">function</span> ();<!-- headerDoc=declaration;uid=//apple_ref/php/func/get_DONTLINK_2;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Return Value</font></h5>
+<p><!-- begin return value --></p>
+<p>Returns JSON encoded details of a specific product based on an ID.
+
+<!-- end return value --></p>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//apple_ref/php/func/get;   name=get --><a name="//apple_ref/php/func/get"></a>
+<h3><a name="get()">get()</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//apple_ref/php/func/get;name=start -->$<!-- a logicalPath="//apple_ref/php/econst/app //apple_ref/php/data/app //apple_ref/php/clconst/app " machineGenerated="true" --><span class="var">app</span><!-- /a -->-&gt;<a machinegenerated="true" href="index.html#//apple_ref/php/func/get" logicalPath="//apple_ref/php/instm/get //apple_ref/php/clm/get //apple_ref/php/intfcm/get //apple_ref/php/intfm/get //apple_ref/php/func/get" target="_top"><span class="function">get</span></a>(
+    '/<span class="char">locations</span>/',
+    <span class="keyword">function</span>();<!-- headerDoc=declaration;uid=//apple_ref/php/func/get;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Return Value</font></h5>
+<p><!-- begin return value --></p>
+<p>Returns a JSON encoded array to the user.
+
+<!-- end return value --></p>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//apple_ref/php/func/get_DONTLINK_1;   name=get --><a name="//apple_ref/php/func/get_DONTLINK_1"></a>
+<h3><a name="get()">get()</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//apple_ref/php/func/get_DONTLINK_1;name=start -->$<!-- a logicalPath="//apple_ref/php/econst/app //apple_ref/php/data/app //apple_ref/php/clconst/app " machineGenerated="true" --><span class="var">app</span><!-- /a -->-&gt;<a machinegenerated="true" href="index.html#//apple_ref/php/func/get" logicalPath="//apple_ref/php/instm/get //apple_ref/php/clm/get //apple_ref/php/intfcm/get //apple_ref/php/intfm/get //apple_ref/php/func/get" target="_top"><span class="function">get</span></a>( 
+    '/<span class="char">hello</span>/', 
+    <span class="keyword">function</span> ();<!-- headerDoc=declaration;uid=//apple_ref/php/func/get_DONTLINK_1;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Return Value</font></h5>
+<p><!-- begin return value --></p>
+<p>Returns a JSON encoded array of products based on a search parameter.
+
+<!-- end return value --></p>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//apple_ref/php/func/getAllReferences;   name=getAllReferences --><a name="//apple_ref/php/func/getAllReferences"></a>
+<h3><a name="getAllReferences">getAllReferences</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//apple_ref/php/func/getAllReferences;name=start --><span class="keyword">function</span> <a machinegenerated="true" href="index.html#//apple_ref/php/func/getAllReferences" logicalPath="//apple_ref/php/instm/getAllReferences //apple_ref/php/clm/getAllReferences //apple_ref/php/intfcm/getAllReferences //apple_ref/php/intfm/getAllReferences //apple_ref/php/func/getAllReferences" target="_top"><span class="function">getAllReferences</span></a> (
+    $<span class="param">latitude</span>,
+    $<span class="param">longitude</span>,
+    $<span class="param">maxResults</span> = <span class="number">60</span>,
+    $<span class="param">nextToken</span> = <span class="keyword">false</span>) <!-- headerDoc=declaration;uid=//apple_ref/php/func/getAllReferences;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Parameters</font></h5>
+<div class="param_indent">
+<dl>
+<dt>
+<!-- headerDoc=functionparam;  uid=//apple_ref/doc/functionparam/getAllReferences/latitude;   name=getAllReferences::latitude -->
+<a name="//apple_ref/doc/functionparam/getAllReferences/latitude"></a>
+<code>latitude</code>
+</dt>
+<dd><p>The latitude of the location.</p></dd>
+<dt>
+<!-- headerDoc=functionparam;  uid=//apple_ref/doc/functionparam/getAllReferences/longitude;   name=getAllReferences::longitude -->
+<a name="//apple_ref/doc/functionparam/getAllReferences/longitude"></a>
+<code>longitude</code>
+</dt>
+<dd><p>The longitude of the location.</p></dd>
+<dt>
+<!-- headerDoc=functionparam;  uid=//apple_ref/doc/functionparam/getAllReferences/maxResults;   name=getAllReferences::maxResults -->
+<a name="//apple_ref/doc/functionparam/getAllReferences/maxResults"></a>
+<code>maxResults</code>
+</dt>
+<dd><p>The maximun number of results possible from the Google Places API.</p></dd>
+</dl>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Return Value</font></h5>
+<p><!-- begin return value --></p>
+<p>An array of location data.
+
+<!-- end return value --></p>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//apple_ref/php/func/getConnection;   name=getConnection --><a name="//apple_ref/php/func/getConnection"></a>
+<h3><a name="getConnection">getConnection</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//apple_ref/php/func/getConnection;name=start --><span class="keyword">function</span> <a machinegenerated="true" href="index.html#//apple_ref/php/func/getConnection" logicalPath="//apple_ref/php/instm/getConnection //apple_ref/php/clm/getConnection //apple_ref/php/intfcm/getConnection //apple_ref/php/intfm/getConnection //apple_ref/php/func/getConnection" target="_top"><span class="function">getConnection</span></a> () <!-- headerDoc=declaration;uid=//apple_ref/php/func/getConnection;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Return Value</font></h5>
+<p><!-- begin return value --></p>
+<p>Returns a database connection using global variables.
+
+<!-- end return value --></p>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=title:func;  uid=//apple_ref/doc/title:func/hello;   name=hello --><a name="//apple_ref/doc/title:func/hello"></a>
+<h3><a name="hello">hello</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//apple_ref/doc/title:func/hello;name=start -->$<!-- a logicalPath="//apple_ref/php/econst/app //apple_ref/php/data/app //apple_ref/php/clconst/app " machineGenerated="true" --><span class="var">app</span><!-- /a -->-&gt;<a machinegenerated="true" href="index.html#//apple_ref/php/func/get" logicalPath="//apple_ref/php/instm/get //apple_ref/php/clm/get //apple_ref/php/intfcm/get //apple_ref/php/intfm/get //apple_ref/php/func/get" target="_top"><span class="function">get</span></a>( 
+    '/<span class="char">hello</span>/', 
+    <span class="keyword">function</span> ();<!-- headerDoc=declaration;uid=//apple_ref/doc/title:func/hello;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Return Value</font></h5>
+<p><!-- begin return value --></p>
+<p>Returns a JSON encoded array of products based on a search parameter.
+
+<!-- end return value --></p>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=title:func;  uid=//apple_ref/doc/title:func/insertIntoDiary;   name=insertIntoDiary --><a name="//apple_ref/doc/title:func/insertIntoDiary"></a>
+<h3><a name="insertIntoDiary">insertIntoDiary</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//apple_ref/doc/title:func/insertIntoDiary;name=start -->$<!-- a logicalPath="//apple_ref/php/econst/app //apple_ref/php/data/app //apple_ref/php/clconst/app " machineGenerated="true" --><span class="var">app</span><!-- /a -->-&gt;<a machinegenerated="true" href="index.html#//apple_ref/php/func/post" logicalPath="//apple_ref/php/instm/post //apple_ref/php/clm/post //apple_ref/php/intfcm/post //apple_ref/php/intfm/post //apple_ref/php/func/post" target="_top"><span class="function">post</span></a>(
+    '/<span class="char">insertIntoDiary</span>',
+    <span class="keyword">function</span> () <!-- a logicalPath="//apple_ref/php/instm/use //apple_ref/php/clm/use //apple_ref/php/intfcm/use //apple_ref/php/intfm/use //apple_ref/php/func/use //apple_ref/php/ftmplt/use //apple_ref/php/defn/use //apple_ref/php/macro/use //apple_ref/doc/anysymbol/use" machineGenerated="true" --><span class="function">use</span><!-- /a --> (
+        $<span class="param">app</span>);<!-- headerDoc=declaration;uid=//apple_ref/doc/title:func/insertIntoDiary;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Return Value</font></h5>
+<p><!-- begin return value --></p>
+<p>Inserts a a product into the MySQL database.
+
+<!-- end return value --></p>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=title:func;  uid=//apple_ref/doc/title:func/locations;   name=locations --><a name="//apple_ref/doc/title:func/locations"></a>
+<h3><a name="locations">locations</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//apple_ref/doc/title:func/locations;name=start -->$<!-- a logicalPath="//apple_ref/php/econst/app //apple_ref/php/data/app //apple_ref/php/clconst/app " machineGenerated="true" --><span class="var">app</span><!-- /a -->-&gt;<a machinegenerated="true" href="index.html#//apple_ref/php/func/get" logicalPath="//apple_ref/php/instm/get //apple_ref/php/clm/get //apple_ref/php/intfcm/get //apple_ref/php/intfm/get //apple_ref/php/func/get" target="_top"><span class="function">get</span></a>(
+    '/<span class="char">locations</span>/',
+    <span class="keyword">function</span>();<!-- headerDoc=declaration;uid=//apple_ref/doc/title:func/locations;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Return Value</font></h5>
+<p><!-- begin return value --></p>
+<p>Returns a JSON encoded array to the user.
+
+<!-- end return value --></p>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//apple_ref/php/func/post;   name=post --><a name="//apple_ref/php/func/post"></a>
+<h3><a name="post()">post()</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//apple_ref/php/func/post;name=start -->$<!-- a logicalPath="//apple_ref/php/econst/app //apple_ref/php/data/app //apple_ref/php/clconst/app " machineGenerated="true" --><span class="var">app</span><!-- /a -->-&gt;<a machinegenerated="true" href="index.html#//apple_ref/php/func/post" logicalPath="//apple_ref/php/instm/post //apple_ref/php/clm/post //apple_ref/php/intfcm/post //apple_ref/php/intfm/post //apple_ref/php/func/post" target="_top"><span class="function">post</span></a>( 
+    '/<span class="char">post</span>',
+    <span class="keyword">function</span> () <!-- a logicalPath="//apple_ref/php/instm/use //apple_ref/php/clm/use //apple_ref/php/intfcm/use //apple_ref/php/intfm/use //apple_ref/php/func/use //apple_ref/php/ftmplt/use //apple_ref/php/defn/use //apple_ref/php/macro/use //apple_ref/doc/anysymbol/use" machineGenerated="true" --><span class="function">use</span><!-- /a --> (
+        $<span class="param">app</span>);<!-- headerDoc=declaration;uid=//apple_ref/php/func/post;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Return Value</font></h5>
+<p><!-- begin return value --></p>
+<p>Adds a user to the database from the InitialViewController
+
+<!-- end return value --></p>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//apple_ref/php/func/post_DONTLINK_1;   name=post --><a name="//apple_ref/php/func/post_DONTLINK_1"></a>
+<h3><a name="post()">post()</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//apple_ref/php/func/post_DONTLINK_1;name=start -->$<!-- a logicalPath="//apple_ref/php/econst/app //apple_ref/php/data/app //apple_ref/php/clconst/app " machineGenerated="true" --><span class="var">app</span><!-- /a -->-&gt;<a machinegenerated="true" href="index.html#//apple_ref/php/func/post" logicalPath="//apple_ref/php/instm/post //apple_ref/php/clm/post //apple_ref/php/intfcm/post //apple_ref/php/intfm/post //apple_ref/php/func/post" target="_top"><span class="function">post</span></a>(
+    '/<span class="char">insertIntoDiary</span>',
+    <span class="keyword">function</span> () <!-- a logicalPath="//apple_ref/php/instm/use //apple_ref/php/clm/use //apple_ref/php/intfcm/use //apple_ref/php/intfm/use //apple_ref/php/func/use //apple_ref/php/ftmplt/use //apple_ref/php/defn/use //apple_ref/php/macro/use //apple_ref/doc/anysymbol/use" machineGenerated="true" --><span class="function">use</span><!-- /a --> (
+        $<span class="param">app</span>);<!-- headerDoc=declaration;uid=//apple_ref/php/func/post_DONTLINK_1;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Return Value</font></h5>
+<p><!-- begin return value --></p>
+<p>Inserts a a product into the MySQL database.
+
+<!-- end return value --></p>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=title:func;  uid=//apple_ref/doc/title:func/product;   name=product --><a name="//apple_ref/doc/title:func/product"></a>
+<h3><a name="product">product</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//apple_ref/doc/title:func/product;name=start -->$<!-- a logicalPath="//apple_ref/php/econst/app //apple_ref/php/data/app //apple_ref/php/clconst/app " machineGenerated="true" --><span class="var">app</span><!-- /a -->-&gt;<a machinegenerated="true" href="index.html#//apple_ref/php/func/get" logicalPath="//apple_ref/php/instm/get //apple_ref/php/clm/get //apple_ref/php/intfcm/get //apple_ref/php/intfm/get //apple_ref/php/func/get" target="_top"><span class="function">get</span></a>(
+    '/<span class="char">product</span>/',
+    <span class="keyword">function</span> ();<!-- headerDoc=declaration;uid=//apple_ref/doc/title:func/product;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Return Value</font></h5>
+<p><!-- begin return value --></p>
+<p>Returns JSON encoded details of a specific product based on an ID.
+
+<!-- end return value --></p>
+<hr class="betweenSections">
+<a name="HeaderDoc_vars"></a>
+<h2 class="h2tight">Globals</h2>
+<dl>
+<dt><tt><a href="index.html#//apple_ref/php/data/googleApiKey" target="_top">googleApiKey</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//apple_ref/php/data/hostName" target="_top">hostName</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//apple_ref/php/data/password" target="_top">password</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//apple_ref/php/data/schemaName" target="_top">schemaName</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//apple_ref/php/data/sessionKey" target="_top">sessionKey</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//apple_ref/php/data/sqlUsername" target="_top">sqlUsername</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//apple_ref/php/data/tescoAppKey" target="_top">tescoAppKey</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//apple_ref/php/data/tescoDevKey" target="_top">tescoDevKey</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//apple_ref/php/data/tescoPass" target="_top">tescoPass</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//apple_ref/php/data/tescoUsername" target="_top">tescoUsername</a></tt></dt>
+<dd></dd>
+</dl>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=data;  uid=//apple_ref/php/data/googleApiKey;   name=googleApiKey --><a name="//apple_ref/php/data/googleApiKey"></a>
+<h3><a name="googleApiKey">googleApiKey</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//apple_ref/php/data/googleApiKey;name=start -->$<a machinegenerated="true" href="index.html#//apple_ref/php/data/googleApiKey" logicalPath="//apple_ref/php/econst/googleApiKey //apple_ref/php/data/googleApiKey" target="_top"><span class="var">googleApiKey</span></a> = "<span class="string">AIzaSyCK7y0TT49xIi3IafMxbsmvrykDLlYNpMA</span>";  <!-- headerDoc=declaration;uid=//apple_ref/php/data/googleApiKey;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Fields</font></h5>
+<div class="param_indent">
+<dl>
+<dt>
+<!-- headerDoc=typedeffield;  uid=//apple_ref/doc/typedeffield/googleApiKey/googleApiKey;   name=googleApiKey::googleApiKey -->
+<a name="//apple_ref/doc/typedeffield/googleApiKey/googleApiKey"></a>
+<code>googleApiKey</code>
+</dt>
+<dd><p>The API key required to access the Google Places API.</p></dd>
+</dl>
+</div>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=data;  uid=//apple_ref/php/data/hostName;   name=hostName --><a name="//apple_ref/php/data/hostName"></a>
+<h3><a name="hostName">hostName</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//apple_ref/php/data/hostName;name=start -->$<a machinegenerated="true" href="index.html#//apple_ref/php/data/hostName" logicalPath="//apple_ref/php/econst/hostName //apple_ref/php/data/hostName" target="_top"><span class="var">hostName</span></a> = "<span class="string">138</span>.<span class="string">251</span>.<span class="string">206</span>.<span class="string">58</span>";  <!-- headerDoc=declaration;uid=//apple_ref/php/data/hostName;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Fields</font></h5>
+<div class="param_indent">
+<dl>
+<dt>
+<!-- headerDoc=typedeffield;  uid=//apple_ref/doc/typedeffield/hostName/hostName;   name=hostName::hostName -->
+<a name="//apple_ref/doc/typedeffield/hostName/hostName"></a>
+<code>hostName</code>
+</dt>
+<dd><p>The IP address of the MySQL database</p></dd>
+</dl>
+</div>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=data;  uid=//apple_ref/php/data/password;   name=password --><a name="//apple_ref/php/data/password"></a>
+<h3><a name="password">password</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//apple_ref/php/data/password;name=start -->$<a machinegenerated="true" href="index.html#//apple_ref/php/data/password" logicalPath="//apple_ref/php/econst/password //apple_ref/php/data/password" target="_top"><span class="var">password</span></a> = "<span class="string">8</span>/<span class="string">c328D5</span>";  <!-- headerDoc=declaration;uid=//apple_ref/php/data/password;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Fields</font></h5>
+<div class="param_indent">
+<dl>
+<dt>
+<!-- headerDoc=typedeffield;  uid=//apple_ref/doc/typedeffield/password/password;   name=password::password -->
+<a name="//apple_ref/doc/typedeffield/password/password"></a>
+<code>password</code>
+</dt>
+<dd><p>The MySQL password to access the database.</p></dd>
+</dl>
+</div>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=data;  uid=//apple_ref/php/data/schemaName;   name=schemaName --><a name="//apple_ref/php/data/schemaName"></a>
+<h3><a name="schemaName">schemaName</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//apple_ref/php/data/schemaName;name=start -->$<a machinegenerated="true" href="index.html#//apple_ref/php/data/schemaName" logicalPath="//apple_ref/php/econst/schemaName //apple_ref/php/data/schemaName" target="_top"><span class="var">schemaName</span></a> = "<span class="string">km842_db</span>";  <!-- headerDoc=declaration;uid=//apple_ref/php/data/schemaName;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Fields</font></h5>
+<div class="param_indent">
+<dl>
+<dt>
+<!-- headerDoc=typedeffield;  uid=//apple_ref/doc/typedeffield/schemaName/schemaName;   name=schemaName::schemaName -->
+<a name="//apple_ref/doc/typedeffield/schemaName/schemaName"></a>
+<code>schemaName</code>
+</dt>
+<dd><p>The schema name on the database where the tables are located.</p></dd>
+</dl>
+</div>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=data;  uid=//apple_ref/php/data/sessionKey;   name=sessionKey --><a name="//apple_ref/php/data/sessionKey"></a>
+<h3><a name="sessionKey">sessionKey</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//apple_ref/php/data/sessionKey;name=start --> $<a machinegenerated="true" href="index.html#//apple_ref/php/data/sessionKey" logicalPath="//apple_ref/php/econst/sessionKey //apple_ref/php/data/sessionKey" target="_top"><span class="var">sessionKey</span></a>;  <!-- headerDoc=declaration;uid=//apple_ref/php/data/sessionKey;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Fields</font></h5>
+<div class="param_indent">
+<dl>
+<dt>
+<!-- headerDoc=typedeffield;  uid=//apple_ref/doc/typedeffield/sessionKey/sessionKey;   name=sessionKey::sessionKey -->
+<a name="//apple_ref/doc/typedeffield/sessionKey/sessionKey"></a>
+<code>sessionKey</code>
+</dt>
+<dd><p>The session key generated as a response from the Tesco API.</p></dd>
+</dl>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//apple_ref/php/data/sessionKey;name=start --><p>All the variables are self documenting by name<!-- headerDoc=discussion;uid=//apple_ref/php/data/sessionKey;name=end --><!-- end discussion -->
+</p>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=data;  uid=//apple_ref/php/data/sqlUsername;   name=sqlUsername --><a name="//apple_ref/php/data/sqlUsername"></a>
+<h3><a name="sqlUsername">sqlUsername</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//apple_ref/php/data/sqlUsername;name=start -->$<a machinegenerated="true" href="index.html#//apple_ref/php/data/sqlUsername" logicalPath="//apple_ref/php/econst/sqlUsername //apple_ref/php/data/sqlUsername" target="_top"><span class="var">sqlUsername</span></a> = "<span class="string">km842</span>";  <!-- headerDoc=declaration;uid=//apple_ref/php/data/sqlUsername;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Fields</font></h5>
+<div class="param_indent">
+<dl>
+<dt>
+<!-- headerDoc=typedeffield;  uid=//apple_ref/doc/typedeffield/sqlUsername/sqlUsername;   name=sqlUsername::sqlUsername -->
+<a name="//apple_ref/doc/typedeffield/sqlUsername/sqlUsername"></a>
+<code>sqlUsername</code>
+</dt>
+<dd><p>The MySQL username to access the database.</p></dd>
+</dl>
+</div>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=data;  uid=//apple_ref/php/data/tescoAppKey;   name=tescoAppKey --><a name="//apple_ref/php/data/tescoAppKey"></a>
+<h3><a name="tescoAppKey">tescoAppKey</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//apple_ref/php/data/tescoAppKey;name=start -->$<a machinegenerated="true" href="index.html#//apple_ref/php/data/tescoAppKey" logicalPath="//apple_ref/php/econst/tescoAppKey //apple_ref/php/data/tescoAppKey" target="_top"><span class="var">tescoAppKey</span></a> = "<span class="string">2E48578A7C28112D2F84</span>";  <!-- headerDoc=declaration;uid=//apple_ref/php/data/tescoAppKey;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Fields</font></h5>
+<div class="param_indent">
+<dl>
+<dt>
+<!-- headerDoc=typedeffield;  uid=//apple_ref/doc/typedeffield/tescoAppKey/tescoAppKey;   name=tescoAppKey::tescoAppKey -->
+<a name="//apple_ref/doc/typedeffield/tescoAppKey/tescoAppKey"></a>
+<code>tescoAppKey</code>
+</dt>
+<dd><p>The Tesco API application key required to acces the API.</p></dd>
+</dl>
+</div>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=data;  uid=//apple_ref/php/data/tescoDevKey;   name=tescoDevKey --><a name="//apple_ref/php/data/tescoDevKey"></a>
+<h3><a name="tescoDevKey">tescoDevKey</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//apple_ref/php/data/tescoDevKey;name=start -->$<a machinegenerated="true" href="index.html#//apple_ref/php/data/tescoDevKey" logicalPath="//apple_ref/php/econst/tescoDevKey //apple_ref/php/data/tescoDevKey" target="_top"><span class="var">tescoDevKey</span></a> = "<span class="string">4Ew9aC50PHIvET3dfFTe</span>";  <!-- headerDoc=declaration;uid=//apple_ref/php/data/tescoDevKey;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Fields</font></h5>
+<div class="param_indent">
+<dl>
+<dt>
+<!-- headerDoc=typedeffield;  uid=//apple_ref/doc/typedeffield/tescoDevKey/tescoDevKey;   name=tescoDevKey::tescoDevKey -->
+<a name="//apple_ref/doc/typedeffield/tescoDevKey/tescoDevKey"></a>
+<code>tescoDevKey</code>
+</dt>
+<dd><p>The tesco developer key, as distributed by the Tesco API.</p></dd>
+</dl>
+</div>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=data;  uid=//apple_ref/php/data/tescoPass;   name=tescoPass --><a name="//apple_ref/php/data/tescoPass"></a>
+<h3><a name="tescoPass">tescoPass</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//apple_ref/php/data/tescoPass;name=start -->$<a machinegenerated="true" href="index.html#//apple_ref/php/data/tescoPass" logicalPath="//apple_ref/php/econst/tescoPass //apple_ref/php/data/tescoPass" target="_top"><span class="var">tescoPass</span></a> = "<span class="string">therock1</span>";  <!-- headerDoc=declaration;uid=//apple_ref/php/data/tescoPass;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Fields</font></h5>
+<div class="param_indent">
+<dl>
+<dt>
+<!-- headerDoc=typedeffield;  uid=//apple_ref/doc/typedeffield/tescoPass/The;   name=tescoPass::The -->
+<a name="//apple_ref/doc/typedeffield/tescoPass/The"></a>
+<code>The</code>
+</dt>
+<dd><p>password for use of the Tesco API.</p></dd>
+</dl>
+</div>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=data;  uid=//apple_ref/php/data/tescoUsername;   name=tescoUsername --><a name="//apple_ref/php/data/tescoUsername"></a>
+<h3><a name="tescoUsername">tescoUsername</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//apple_ref/php/data/tescoUsername;name=start -->$<a machinegenerated="true" href="index.html#//apple_ref/php/data/tescoUsername" logicalPath="//apple_ref/php/econst/tescoUsername //apple_ref/php/data/tescoUsername" target="_top"><span class="var">tescoUsername</span></a> = "<span class="string">kunal</span>.<span class="string">mandalia</span>@<span class="string">hotmail</span>.<span class="string">com</span>";  <!-- headerDoc=declaration;uid=//apple_ref/php/data/tescoUsername;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Fields</font></h5>
+<div class="param_indent">
+<dl>
+<dt>
+<!-- headerDoc=typedeffield;  uid=//apple_ref/doc/typedeffield/tescoUsername/tescoUsername;   name=tescoUsername::tescoUsername -->
+<a name="//apple_ref/doc/typedeffield/tescoUsername/tescoUsername"></a>
+<code>tescoUsername</code>
+</dt>
+<dd><p>The username required to login to the Tesco API.</p></dd>
+</dl>
+</div>
+<p class="gapBeforeFooter">&nbsp;</p>
+<hr class="afterFooter">
+<div class="hd_copyright_and_timestamp">
+<p class="hd_timestamp">Last Updated: Saturday, March 29, 2014
+</p>
+</div>
+</td>
+</tr></table>
+</body>
+</html>

@@ -5,8 +5,8 @@ require 'Slim/Slim.php';
 \Slim\Slim::registerAutoloader();
 
 
-/**
-	Food Nudge API
+/*!
+	@class Food Nudge API
 */
 $app = new \Slim\Slim();
 
@@ -18,26 +18,64 @@ Add connection checking etc! Respond with status messages TODO!!!!!
 Global variables - need to be moved to a higher directory for security!!!!
 */
 
-/*All the variables are self documenting by name*/
+/*!All the variables are self documenting by name*/
 
+/*!@param sessionKey
+The session key generated as a response from the Tesco API.
+*/
 $sessionKey;
+
+/*!@param tescoUsername
+The username required to login to the Tesco API.
+*/
 $tescoUsername = "kunal.mandalia@hotmail.com";
+
+/*!@param 
+The password for use of the Tesco API.
+*/
 $tescoPass = "therock1";
+
+/*!@param tescoDevKey
+The tesco developer key, as distributed by the Tesco API.
+*/
 $tescoDevKey = "4Ew9aC50PHIvET3dfFTe";
+
+/*!@param tescoAppKey
+The Tesco API application key required to acces the API.
+*/
 $tescoAppKey = "2E48578A7C28112D2F84";
 
+/*!@param hostName
+The IP address of the MySQL database
+*/
 $hostName = "138.251.206.58";
+
+/*!@param sqlUsername
+The MySQL username to access the database.
+*/
 $sqlUsername = "km842";
+
+/*!@param password
+The MySQL password to access the database.
+*/
 $password = "8/c328D5";
+
+/*!@param schemaName
+The schema name on the database where the tables are located.
+*/
 $schemaName = "km842_db";
 
+/*!@param googleApiKey
+The API key required to access the Google Places API.
+*/
 $googleApiKey = "AIzaSyCK7y0TT49xIi3IafMxbsmvrykDLlYNpMA";
-/*
-*/
 
-/*Creates connection to database
-Returns a dataabsae connection.
-*/
+
+/*!
+ @Function getConnection
+ @result
+Returns a database connection using global variables.
+  */
 function getConnection () {
     global $hostName, $sqlUsername, $password, $schemaName;
 
@@ -49,13 +87,12 @@ function getConnection () {
         echo "not connected!";
         }
     } 
-/*
-*/
 
-
-/*Create session key for tesco api
-Returns an instance of a session key that update the global session keyy variable.
-*/
+/*!
+ @Function createSessionKey
+ @result
+Returns an instance of a session key that updates the global sessionKey variable.
+  */
 function createSessionKey () {
     global $tescoUsername, $tescoPass, $tescoDevKey, $tescoAppKey, $sessionKey;
 
@@ -68,14 +105,28 @@ function createSessionKey () {
         }
 }
 
-/*Destroys a database connection*/
-function destroyConnection ($db) {
+/*!
+ @Function destroyConnection
+ @param db
+An instance of the database that should be nulled.
+ @result
+A null connection. 
+  */
+ function destroyConnection ($db) {
     $db = null;
 }
 
-/*Gets all 60 location references from Google
-Params: latitude, longitude, max results, and the next token.
-Returns an array of location references.*/
+/*!
+ @Function getAllReferences
+ @param latitude
+The latitude of the location.
+ @param longitude
+The longitude of the location.
+ @param maxResults
+The maximun number of results possible from the Google Places API.
+ @result
+An array of location data.
+  */
 function getAllReferences ($latitude, $longitude, $maxResults = 60, $nextToken = false) {
     global $googleApiKey;
 
@@ -100,9 +151,12 @@ function getAllReferences ($latitude, $longitude, $maxResults = 60, $nextToken =
 
 }
 
-/*
-* Return user location data as json from Google
-*/
+
+/*!
+ @Function locations
+ @result
+Returns a JSON encoded array to the user.
+  */
 $app->get('/locations/', function() {
     $latitude = Slim\Slim::getInstance()->request()->get('lat');
     $longitude = Slim\Slim::getInstance()->request()->get('long');
@@ -111,9 +165,11 @@ $app->get('/locations/', function() {
     echo json_encode($references);    
 });
 
-
-/*GET methods that returns a list of products based on a search parameter - a id or text
-Returns json of products.*/
+/*!
+ @Function hello
+ @result
+Returns a JSON encoded array of products based on a search parameter.
+  */
 $app->get(
     '/hello/',
     function () {
@@ -137,6 +193,11 @@ $app->get(
 /* Gets a specific product's details based on a product ID.
 Returns json of product details.
 */
+/*!
+ @Function product
+ @result
+Returns JSON encoded details of a specific product based on an ID.
+  */
 $app->get('/product/', function () {
     $searchKey = Slim\Slim::getInstance()->request()->get('id');
     $sessionKey = createSessionKey(); 
@@ -148,6 +209,11 @@ $app->get('/product/', function () {
 
 /* POST method from InitialViewController that inserts a user to the database.
 */
+/*!
+ @Function post
+ @result
+Adds a user to the database from the InitialViewController
+  */
 $app->post(
     '/post', function () use ($app){
     $request = Slim\Slim::getInstance()->request();
@@ -179,6 +245,13 @@ $app->post(
     }
 );
 
+/*!
+ @Function checkProductEntry
+ @param productId
+The product id of the product to be checked.  
+ @result
+Nothing
+  */
 function checkProductEntry($productId) {
     $db = getConnection();
     $sqlStatement = "SELECT productId FROM Products WHERE productId = {$productId}";
@@ -202,6 +275,13 @@ function checkProductEntry($productId) {
 
 /*Helper method that adds a product to the database.
 */
+/*!
+ @Function addProductToDatabase
+ @param productId
+The product ID of the product to be added to the database.
+ @result
+Returns a JSON encoded array to the user.
+  */
 function addProductToDatabase ($productId) {
     //get data from tesco and then add to database
     $sessionKey = createSessionKey();
@@ -216,6 +296,8 @@ function addProductToDatabase ($productId) {
     $satFat = $result->Products[0]->RDA_Saturates_Grammes;
     $sugar = $result->Products[0]->RDA_Sugar_Grammes;
     echo $result->Products[0]->RDA_Sugar_Grammes;
+
+// check other 100g entries, add those instead!    
 
     $sql = "INSERT INTO Products (productId, name, calories, salt, fat, saturates, sugar) VALUES (:id, :name, :calories,
          :salt, :fat, :satFat, :sugar)";
@@ -245,6 +327,11 @@ function addProductToDatabase ($productId) {
 
 /* POST method that inserts an entry into the diary database. 
 */
+/*!
+ @Function insertIntoDiary
+ @result
+Inserts a a product into the MySQL database.
+  */
 $app->post('/insertIntoDiary', function () use ($app) {
     $request = Slim\Slim::getInstance()->request();
     $entry = json_decode($request->getBody());
@@ -305,6 +392,17 @@ $app->post('/insertIntoDiary', function () use ($app) {
 });
 
 /*Inserts product and user data into the database*/
+/*!
+ @Function addToLog
+ @param diaryId
+The diary id of the product and user.
+ @param dateConsumed
+The date that the product was consumed.
+ @param db
+The database object required to perform database options.   
+ @result
+Returns a JSON encoded array to the user.
+  */
 function addToLog($diaryId, $dateConsumed, $db) {
     echo "\n{$diaryId}\n{$dateConsumed}";
     $sql = "INSERT INTO Log (DiaryId, dateConsumed) VALUES (:diaryId, :date)";
